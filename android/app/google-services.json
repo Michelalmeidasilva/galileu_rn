@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "728001156547",
+    "project_id": "galileu-rn",
+    "storage_bucket": "galileu-rn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728001156547:android:f805867cdc190726abd976",
+        "android_client_info": {
+          "package_name": "com.galileu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728001156547-a167fp3dvgugj990oprfa8q137387711.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.galileu",
+            "certificate_hash": "0cbfc868262e5c239146a48c5815aca4f8a86999"
+          }
+        },
+        {
+          "client_id": "728001156547-docgbsjctp1atp1isrf4omljgcsacir1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8cxSCK5hamcLbZOO1JQ32rsWMhz-yeKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728001156547-d8n8s8hqv0pue28t5jmbsl9i395an4t9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
