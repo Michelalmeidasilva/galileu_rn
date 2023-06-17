@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
 import {View, TextInput, Button} from 'react-native';
 import LoginModel from '../viewmodel/LoginViewModel';
-import auth from '@react-native-firebase/auth';
 
 type UserScreenProps = {
   viewModel?: LoginModel;
 };
 
-const UserScreen: FC<UserScreenProps> = ({
-  viewModel = new LoginModel({email: '', password: ''}),
-}) => {
+const LoginScreen: FC<UserScreenProps> = ({viewModel = new LoginModel()}) => {
+  console.log('lgin');
   return (
     <View>
       <TextInput
@@ -36,19 +34,12 @@ const UserScreen: FC<UserScreenProps> = ({
 
       <Button
         title="login"
-        onPress={() => {
-          console.log(viewModel.user.email);
-          console.log(viewModel.user.password);
-          auth().createUserWithEmailAndPassword(
-            viewModel.user.email,
-            viewModel.user.password,
-          );
-
-          console.log(viewModel?.user);
+        onPress={async () => {
+          await viewModel.loginWithEmailAndPassword();
         }}
       />
     </View>
   );
 };
 
-export default UserScreen;
+export default LoginScreen;
