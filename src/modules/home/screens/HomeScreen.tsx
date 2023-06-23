@@ -1,4 +1,4 @@
-import LoginViewModel from '../../login/viewmodel/LoginViewModel';
+import LoginViewModel from '../../login/controllers/useLoginController';
 import React, {FC} from 'react';
 import {View, Button, Text} from 'react-native';
 

@@ -1,13 +1,14 @@
 import * as React from 'react';
 
+import {ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import auth from '@react-native-firebase/auth';
 
 import HomeScreen from '../modules/home/screens/HomeScreen';
+import RegisterScreen from '../modules/register/screens/RegisterScreen';
 import LoginScreen from '../modules/login/screens/LoginScreen';
-import {ActivityIndicator} from 'react-native';
 
 const AuthenticatedStack = () => {
   const Stack = createNativeStackNavigator();
@@ -31,7 +32,13 @@ const UnAuthenticatedStack = () => {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{title: 'Welcome'}}
+        options={{title: 'Login'}}
+      />
+
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{title: 'Sign-up'}}
       />
     </Stack.Navigator>
   );

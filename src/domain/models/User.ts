@@ -1,9 +1,9 @@
 class UserModel {
-  password?: string = undefined;
-  email?: string = undefined;
+  password: string;
+  email: string | null;
   #token?: string;
 
-  constructor(name?: string, email?: string) {
+  constructor(name: string, email: string) {
     this.password = name;
     this.email = email;
     this.setToken = this.setToken.bind(this);

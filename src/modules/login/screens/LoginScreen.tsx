@@ -1,13 +1,12 @@
-import React, {FC} from 'react';
+import React, {useState} from 'react';
 import {View, TextInput, Button} from 'react-native';
-import LoginModel from '../viewmodel/LoginViewModel';
+import {useNavigation} from '@react-navigation/native';
+import useLoginController from '../controllers/useLoginController';
 
-type UserScreenProps = {
-  viewModel?: LoginModel;
-};
+const LoginScreen = ({}) => {
+  const controller = useLoginController();
+  const navigation = useNavigation();
 
-const LoginScreen: FC<UserScreenProps> = ({viewModel = new LoginModel()}) => {
-  console.log('lgin');
   return (
     <View>
       <TextInput
@@ -15,10 +14,7 @@ const LoginScreen: FC<UserScreenProps> = ({viewModel = new LoginModel()}) => {
           marginHorizontal: 10,
         }}
         placeholder="Email"
-        onChangeText={item => {
-          viewModel.user.email = item;
-          return item;
-        }}
+        onChangeText={item => (controller.user.email = item)}
       />
       <TextInput
         style={{
@@ -26,17 +22,27 @@ const LoginScreen: FC<UserScreenProps> = ({viewModel = new LoginModel()}) => {
           marginTop: 8,
         }}
         placeholder="Password"
-        onChangeText={item => {
-          viewModel.user.password = item;
-          return item;
-        }}
+        onChangeText={item => (controller.user.password = item)}
       />
 
       <Button
         title="login"
+        disabled={controller?.isLoading}
         onPress={async () => {
-          await viewModel.loginWithEmailAndPassword();
+          await controller.loginWithEmailAndPassword();
         }}
+      />
+
+      <Button
+        title="sign-up"
+        onPress={async () => {
+          navigation.navigate('Register');
+        }}
+      />
+
+      <Button
+        title="google"
+        onPress={async () => await controller.loginWithGoogle()}
       />
     </View>
   );
