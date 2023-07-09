@@ -1,19 +1,31 @@
-import LoginViewModel from '../../login/controllers/useLoginController';
+import {useNavigation} from '@react-navigation/native';
+import {useUser} from '../../../providers';
 import React, {FC} from 'react';
+
 import {View, Button, Text} from 'react-native';
 
-const HomeScreen: FC<{viewModel: LoginViewModel}> = ({
-  viewModel = new LoginViewModel(),
-}) => {
-  console.log('home');
+type Props = {};
 
+const HomeScreen: FC<Props> = ({}) => {
+  const navigation = useNavigation();
+  const {logout} = useUser();
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Text>Home</Text>
+
+      <Button
+        title="Chat"
+        onPress={() => {
+          navigation.navigate('Chat');
+        }}
+      />
+
+      <Text>Logout</Text>
+
       <Button
         title="Logout"
         onPress={async () => {
-          viewModel.logout();
+          await logout();
         }}
       />
     </View>

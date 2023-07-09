@@ -4,12 +4,11 @@ import {ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import auth from '@react-native-firebase/auth';
-
 import HomeScreen from '../modules/home/screens/HomeScreen';
 import RegisterScreen from '../modules/register/screens/RegisterScreen';
 import LoginScreen from '../modules/login/screens/LoginScreen';
 import ChatScreen from '../modules/chat/screens/ChatScreen';
+import {useUser} from './';
 
 const AuthenticatedStack = () => {
   const Stack = createNativeStackNavigator();
@@ -17,15 +16,15 @@ const AuthenticatedStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={{title: 'Chat'}}
-      />
-
-      <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{title: 'Welcome'}}
+      />
+
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{title: 'Chat'}}
       />
     </Stack.Navigator>
   );
@@ -51,22 +50,8 @@ const UnAuthenticatedStack = () => {
   );
 };
 
-export default function NavigationProvider() {
-  const [user, setUser] = React.useState();
-  const [initializing, setInitializing] = React.useState(true);
-
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) {
-      setInitializing(false);
-    }
-  }
-
-  React.useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-
-    return subscriber; // unsubscribe on unmount
-  }, []);
+const NavigationProvider = () => {
+  const {user, initializing} = useUser();
 
   if (initializing) {
     return <ActivityIndicator size={'small'} />;
@@ -77,4 +62,6 @@ export default function NavigationProvider() {
       {user ? <AuthenticatedStack /> : <UnAuthenticatedStack />}
     </NavigationContainer>
   );
-}
+};
+
+export {NavigationProvider};

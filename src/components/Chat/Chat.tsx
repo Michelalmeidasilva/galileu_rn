@@ -1,30 +1,23 @@
 import React, {FC} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import Message from './Message';
+import Message from './ChatMessage';
 import ChatFooter from './ChatFooter';
 
-type ChatProps = {
+type Props = {
   initialValue: MessageValues[];
+  userId: string;
 };
 
-const MessagesStored: MessageValues[] | undefined = [
-  {
-    text: 'Hello! How can I assist you today?',
-    id: 'dsadsdasd12324',
-    sended: 'day',
-    user: 'chatgpt-3.5',
-  },
-];
-
-const Chat: FC<ChatProps> = ({initialValue = MessagesStored}) => {
+const Chat: FC<Props> = ({initialValue = [], userId}) => {
   const [messages, setMessages] = React.useState(initialValue);
   const flatListRef = React.useRef<FlatList>(null);
 
+  console.log(JSON.stringify(messages, null, 4));
   const renderItem = (item: MessageValues) => {
     return (
       <Message
-        messageName={'michel'}
-        userName={item.user}
+        receiverId={item?.userId}
+        userId={userId}
         key={item.id}
         value={item.text}
       />
@@ -41,6 +34,7 @@ const Chat: FC<ChatProps> = ({initialValue = MessagesStored}) => {
       />
 
       <ChatFooter
+        userId={userId}
         onSendMessage={(value: MessageValues) => {
           setMessages(current => [...current, value]);
           flatListRef?.current?.scrollToEnd();

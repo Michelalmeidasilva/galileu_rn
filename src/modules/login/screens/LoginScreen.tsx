@@ -1,10 +1,17 @@
 import React from 'react';
 import {View, TextInput, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
 import useLoginController from '../controllers/useLoginController';
+import {useUser} from '../../../providers';
 
 const LoginScreen = ({}) => {
-  const controller = useLoginController();
+  const {loginWithCredentials, loginWithGoogle} = useUser();
+
+  const controller = useLoginController({
+    loginWithCredentials,
+    loginWithGoogle,
+  });
   const navigation = useNavigation();
 
   return (
@@ -29,7 +36,7 @@ const LoginScreen = ({}) => {
         title="login"
         disabled={controller?.isLoading}
         onPress={async () => {
-          await controller.loginWithEmailAndPassword();
+          await controller.login('credentials');
         }}
       />
 
@@ -42,7 +49,7 @@ const LoginScreen = ({}) => {
 
       <Button
         title="google"
-        onPress={async () => await controller.loginWithGoogle()}
+        onPress={async () => await controller.login('google')}
       />
     </View>
   );

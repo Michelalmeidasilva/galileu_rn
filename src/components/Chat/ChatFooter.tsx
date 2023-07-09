@@ -1,30 +1,25 @@
 import React, {FC} from 'react';
-import {StyleSheet} from 'react-native';
-import {Text, TextInput, TouchableOpacity, View, ViewProps} from 'react-native';
+import {View, ViewProps, StyleSheet} from 'react-native';
+import ChatInput from './ChatInput';
+import {delay, uid} from '../../domain/utils';
+import ChatButton from './ChatButton';
 
 type ChatFooterProps = {
   onSendMessage: (value: MessageValues) => void;
+  userId: string;
 } & ViewProps;
 
-const uid = function () {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
-};
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-const ChatFooter: FC<ChatFooterProps> = ({onSendMessage}) => {
+const ChatFooter: FC<ChatFooterProps> = ({onSendMessage, userId}) => {
   const [text, setText] = React.useState('');
   const [isSendingMessage, setIsSendingMessage] = React.useState(false);
   const [hasMoreContentToLoad, setHasMoreContentToLoad] = React.useState(true);
-
-  const inputRef = React.useRef(null);
 
   const thisIsAnExamplesRandomically = () => {
     onSendMessage({
       id: uid(),
       sended: '',
       text: 'By passing extraData={selectedId} to FlatList we make sure FlatList itself will re-render when the state changes. Without setting this prop, FlatList would not know it',
-      user: 'chatgpt-3.5',
+      userId: 'chatgpt-3.5',
     });
   };
 
@@ -32,7 +27,7 @@ const ChatFooter: FC<ChatFooterProps> = ({onSendMessage}) => {
     try {
       setIsSendingMessage(true);
 
-      onSendMessage({id: uid(), sended: '', text, user: 'michel'});
+      onSendMessage({id: uid(), sended: '', text, userId});
 
       await delay(2000);
 
@@ -57,50 +52,25 @@ const ChatFooter: FC<ChatFooterProps> = ({onSendMessage}) => {
 
   return (
     <View style={styles.container}>
-      {!isSendingMessage ? (
-        <TextInput
-          ref={inputRef}
-          style={{flex: 9, marginLeft: 10, height: 60}}
-          placeholder="Send a Message"
-          value={text}
-          onChangeText={setText}
-        />
-      ) : (
-        <View style={styles.text}>
-          <Text>Generating a response ...</Text>
-        </View>
-      )}
+      <ChatInput
+        isSendingMessage={isSendingMessage}
+        setText={setText}
+        text={text}
+      />
 
-      <TouchableOpacity
-        style={styles?.button}
-        disabled={isSendingMessage}
-        onPress={async () => {
-          if (hasMoreContentToLoad) {
-            await loadMessage();
-          }
-          if (text !== '' && !isSendingMessage) {
-            await sendMessage();
-          }
-        }}>
-        {isSendingMessage ? <Text>Wait a moment</Text> : <Text>send</Text>}
-      </TouchableOpacity>
+      <ChatButton
+        hasMoreContentToLoad={hasMoreContentToLoad}
+        isSendingMessage={isSendingMessage}
+        loadMessage={loadMessage}
+        sendMessage={sendMessage}
+        setText={setText}
+        text={text}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    flex: 1,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   container: {
     backgroundColor: 'white',
     alignContent: 'space-between',

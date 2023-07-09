@@ -8,10 +8,10 @@
 import React from 'react';
 
 import {StatusBar, useColorScheme} from 'react-native';
-
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import NavigationProvider from './src/navigation/NavigationProvider';
+
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import MainProvider from './src/providers/MainProvider';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,7 +28,7 @@ function App(): JSX.Element {
           backgroundColor={backgroundStyle.backgroundColor}
         />
 
-        <NavigationProvider />
+        <MainProvider />
       </SafeAreaProvider>
     </>
   );
