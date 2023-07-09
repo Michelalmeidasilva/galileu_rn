@@ -2,8 +2,9 @@ import React from 'react';
 import {View, TextInput, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import useLoginController from '../controllers/useLoginController';
-import {useUser} from '../../../providers';
+import {useUser} from 'providers';
+
+import useLoginController from 'modules/login/controllers/useLoginController';
 
 const LoginScreen = ({}) => {
   const {loginWithCredentials, loginWithGoogle} = useUser();
@@ -55,4 +56,4 @@ const LoginScreen = ({}) => {
   );
 };
 
-export default LoginScreen;
+export {LoginScreen};

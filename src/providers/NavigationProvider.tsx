@@ -4,10 +4,10 @@ import {ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import HomeScreen from '../modules/home/screens/HomeScreen';
-import RegisterScreen from '../modules/register/screens/RegisterScreen';
-import LoginScreen from '../modules/login/screens/LoginScreen';
-import ChatScreen from '../modules/chat/screens/ChatScreen';
+import {HomeScreen} from 'modules/home/screens/';
+import {RegisterScreen} from 'modules/register/screens';
+import {LoginScreen} from 'modules/login/screens';
+import {ChatScreen} from 'modules/chat/screens';
 import {useUser} from './';
 
 const AuthenticatedStack = () => {

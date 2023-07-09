@@ -68,9 +68,7 @@ const UserProvider: FC<Props> = ({children}) => {
       if (initializing) {
         setInitializing(false);
       }
-    } catch (err) {
-      console.log('err', err);
-    }
+    } catch (err) {}
   }
 
   React.useEffect(() => {

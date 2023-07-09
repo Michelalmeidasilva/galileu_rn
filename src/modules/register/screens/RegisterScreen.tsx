@@ -75,4 +75,4 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+export {RegisterScreen};

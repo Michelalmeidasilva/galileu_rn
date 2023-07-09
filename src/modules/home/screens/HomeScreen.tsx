@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useUser} from '../../../providers';
+import {useUser} from 'providers';
 import React, {FC} from 'react';
 
 import {View, Button, Text} from 'react-native';
@@ -32,4 +32,4 @@ const HomeScreen: FC<Props> = ({}) => {
   );
 };
 
-export default HomeScreen;
+export {HomeScreen};

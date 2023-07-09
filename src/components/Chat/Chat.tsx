@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
+
 import Message from './ChatMessage';
 import ChatFooter from './ChatFooter';
 
@@ -12,7 +13,6 @@ const Chat: FC<Props> = ({initialValue = [], userId}) => {
   const [messages, setMessages] = React.useState(initialValue);
   const flatListRef = React.useRef<FlatList>(null);
 
-  console.log(JSON.stringify(messages, null, 4));
   const renderItem = (item: MessageValues) => {
     return (
       <Message

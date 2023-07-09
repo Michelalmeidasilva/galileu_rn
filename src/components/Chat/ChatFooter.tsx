@@ -1,8 +1,10 @@
 import React, {FC} from 'react';
 import {View, ViewProps, StyleSheet} from 'react-native';
-import ChatInput from './ChatInput';
-import {delay, uid} from '../../domain/utils';
+
+import {delay, uid} from 'domain/utils';
+
 import ChatButton from './ChatButton';
+import ChatInput from './ChatInput';
 
 type ChatFooterProps = {
   onSendMessage: (value: MessageValues) => void;

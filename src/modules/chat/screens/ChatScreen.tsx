@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Chat from '../../../components/Chat/Chat';
-import {useUser} from '../../../providers';
+import Chat from 'components/Chat/Chat';
+import {useUser} from 'providers';
 
 const MessagesStored: MessageValues[] | undefined = [
   {
@@ -15,8 +15,6 @@ const MessagesStored: MessageValues[] | undefined = [
 const ChatScreen = () => {
   const {user} = useUser();
 
-  console.log(JSON.stringify(user, null, 2));
-
   return (
     <Chat
       userId={user?.providerData?.[0]?.email}
@@ -25,4 +23,4 @@ const ChatScreen = () => {
   );
 };
 
-export default ChatScreen;
+export {ChatScreen};
