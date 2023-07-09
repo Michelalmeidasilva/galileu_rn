@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, TextInput, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import useLoginController from '../controllers/useLoginController';

@@ -9,12 +9,19 @@ import auth from '@react-native-firebase/auth';
 import HomeScreen from '../modules/home/screens/HomeScreen';
 import RegisterScreen from '../modules/register/screens/RegisterScreen';
 import LoginScreen from '../modules/login/screens/LoginScreen';
+import ChatScreen from '../modules/chat/screens/ChatScreen';
 
 const AuthenticatedStack = () => {
   const Stack = createNativeStackNavigator();
 
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{title: 'Chat'}}
+      />
+
       <Stack.Screen
         name="Home"
         component={HomeScreen}
