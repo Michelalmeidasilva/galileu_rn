@@ -7,7 +7,6 @@ import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import {HomeScreen} from 'modules/home/screens/';
 import {RegisterScreen} from 'modules/register/screens';
@@ -16,19 +15,17 @@ import {ChatScreen} from 'modules/chat/screens';
 import {Header} from 'components/Header';
 
 import {useUser} from './';
-import {DrawerMenu} from 'components/DrawerMenu';
+import {ProfileScreen} from 'modules/profile';
 
 const AuthenticatedStack = () => {
   const screenOptions: NativeStackNavigationOptions = {
     header: props => <Header />,
   };
 
-  const Stack = createDrawerNavigator();
+  const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator
-      screenOptions={screenOptions}
-      drawerContent={props => <DrawerMenu {...props} />}>
+    <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name="Home"
         component={HomeScreen}
@@ -39,6 +36,12 @@ const AuthenticatedStack = () => {
         name="Chat"
         component={ChatScreen}
         options={{title: 'Chat'}}
+      />
+
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{headerShown: true}}
       />
     </Stack.Navigator>
   );
@@ -52,7 +55,7 @@ const UnAuthenticatedStack = () => {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{title: 'Login'}}
+        options={{headerShown: false}}
       />
 
       <Stack.Screen

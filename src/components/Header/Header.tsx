@@ -1,7 +1,13 @@
 import React from 'react';
 
 import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const Header = () => {
@@ -9,11 +15,12 @@ export const Header = () => {
 
   return (
     <>
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <View style={styles.container}>
         <TouchableOpacity
           style={{flex: 2, padding: 20}}
           onPress={() => {
-            navigation.toggleDrawer();
+            navigation.navigate('Profile');
           }}>
           <Icon name="menu" />
         </TouchableOpacity>
@@ -29,6 +36,6 @@ const styles = StyleSheet.create({
     alignContent: 'space-between',
     height: 60,
     flexDirection: 'row',
-    backgroundColor: 'purple',
+    backgroundColor: 'white',
   },
 });

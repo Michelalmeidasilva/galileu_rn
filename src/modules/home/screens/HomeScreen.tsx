@@ -2,15 +2,17 @@ import {useNavigation} from '@react-navigation/native';
 import {useUser} from 'providers';
 import React, {FC} from 'react';
 
-import {View, Button, Text} from 'react-native';
+import {View, Button, Text, StyleSheet} from 'react-native';
 
 type Props = {};
 
 const HomeScreen: FC<Props> = ({}) => {
   const navigation = useNavigation();
   const {logout} = useUser();
+
+  //* To-do Listagem com os batepapos do chat gpt organizado por titulo*/
   return (
-    <View style={{flex: 1}}>
+    <View style={styles?.body}>
       <Text>Home</Text>
 
       <Button
@@ -31,5 +33,11 @@ const HomeScreen: FC<Props> = ({}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+  },
+});
 
 export {HomeScreen};
